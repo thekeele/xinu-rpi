@@ -23,7 +23,7 @@ shellcmd xsh_exfour(int nargs, char *args[])
     {
         printf("Usage: %s\n\n", args[0]);
         printf("Description:\n");
-        printf("\tDisplays current time\n");
+        printf("\tCreates two threads and print characters\n");
         printf("Options:\n");
         printf("\t--help\tdisplay this help and exit\n");
         return OK;
