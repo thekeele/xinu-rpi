@@ -60,6 +60,7 @@ shellcmd xsh_clear(int, char *[]);
 shellcmd xsh_dumptlb(int, char *[]);
 shellcmd xsh_date(int, char *[]);
 shellcmd xsh_extwo(void);
+shellcmd xsh_exthree(void);
 shellcmd xsh_exfour(void);
 shellcmd xsh_ethstat(int, char *[]);
 shellcmd xsh_exit(int, char *[]);
