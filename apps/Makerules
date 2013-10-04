@@ -4,7 +4,7 @@
 COMP = apps
 
 # Source files for this component
-C_FILES = date.c rdate.c extwo.c exthree.c exfour.c
+C_FILES = date.c rdate.c extwo.c exthree.c exfour.c exfive.c
 
 S_FILES =
 
