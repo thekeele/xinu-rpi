@@ -6,7 +6,6 @@
  */
 /* Enhanced Xinu, Fakeright (F) 2013.  All rights revoked. */
 
-//#include <xinu.h> //is this needed?
 #include <exfour.h>
 #include <stdint.h>
 
@@ -14,7 +13,7 @@ void produce(void), consume(void); /* function prototypes */
 int32_t n = 0; /* external variables are shared by all processes */
 
 /**
- * xsh_exfour -- spawn unsynchronized producer and consumer processes
+ * exfour -- spawn unsynchronized producer and consumer processes
  * @param void 
  */
 void exfour(void)
@@ -31,7 +30,7 @@ void produce(void)
 {
   int32_t i;
   
-  for( i=1 ; i<=2000 ; i++ )
+  for( i=1 ; i <= 20; i++ )
     n++;
 }
 
@@ -43,6 +42,6 @@ void consume(void)
 {
   int32_t i;
   
-  for( i=1 ; i<=2000 ; i++ )
+  for( i=1 ; i <= 20; i++ )
     printf("The value of n is %d \n", n);
 }
