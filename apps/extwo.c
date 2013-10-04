@@ -1,5 +1,6 @@
 /* ex2.c - main, sndA, sndB */
 #include <extwo.h>
+#include <stdint.h>
 
 void sndA(void), sndB(void);
 
@@ -19,8 +20,11 @@ void extwo(void)
  * */
 void sndA(void)
 {
-  while( 1 )
+  int32_t i = 0;
+  while( i < 20 ) {
     putc(CONSOLE, "A");
+    i++;
+  }
 }
 
 /*------------------------------------------------------------------------
@@ -29,6 +33,9 @@ void sndA(void)
  * */
 void sndB(void)
 {
-  while( 1 )
+  int32_t i = 0;
+  while( i < 20 ) {
     putc(CONSOLE, "B");
+    i++;
+  }
 }

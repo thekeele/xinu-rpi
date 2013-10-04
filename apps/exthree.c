@@ -1,5 +1,6 @@
 /* ex3.c - main, sndch */
 #include <exthree.h>
+#include <stdint.h>
 
 void sndch(char);
 
@@ -19,6 +20,9 @@ void exthree(void)
  * */
 void sndch(char ch /* character to emit continuously */)
 {
-  while ( 1 )
+  int32_t i = 0;
+  while ( i < 20 ) {
     putc(CONSOLE, ch);
+    i++;
+  }
 }
