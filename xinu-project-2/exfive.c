@@ -10,7 +10,8 @@
 #include <stdint.h>
 #include <semaphore.h>
 
-void producer(semaphore, semaphore), consumer(semaphore, semaphore);
+void producer(semaphore, semaphore);
+void consumer(semaphore, semaphore);
 
 static int32_t n = 0; /* n assigned an initial value of zero */
 
