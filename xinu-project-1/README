@@ -1,0 +1,7 @@
+Assignment: Xinu Project 1
+Author: Mark Keele & Frank Diaz
+Date: 9/30/2013
+
+Description: These files will collectively add the "exfour" command. This command will spawn two processes and output characters to the command line. In its current state, the program hangs.  
+
+Notes: I included all files that I modified or added.
