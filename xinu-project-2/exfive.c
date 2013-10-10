@@ -2,16 +2,11 @@
  * @file exfive.c
  * @provides producer and consumer with semaphores
  *    
- * $Id: exfive.c 1337 2013-09-25 11:11:1Z mkeele $
+ * $Id: `exfive.c 1337 2013-09-25 11:11:1Z mkeele $
  */
 /* Enhanced Xinu, Fakeright (F) 2013.  All rights revoked. */
 
 #include <exfive.h>
-#include <stdint.h>
-#include <semaphore.h>
-
-void producer(semaphore, semaphore);
-void consumer(semaphore, semaphore);
 
 static int32_t n = 0; /* n assigned an initial value of zero */
 
@@ -38,7 +33,7 @@ void producer(semaphore consumed, semaphore produced)
 {
   int32_t i;
 
-  for( i=1 ; i<=20; i++ ) {
+  for( i=1 ; i<=2000; i++ ) {
     wait(consumed);
     n++;
     signal(produced);
@@ -53,9 +48,10 @@ void consumer(semaphore consumed, semaphore produced)
 {
   int32_t i;
   
-  for( i=1 ; i<=20; i++ ) {
+  for( i=1 ; i<=2000; i++ ) {
     wait(produced);
     printf("n is %d \n", n);
     signal(consumed);
   }
+  printf("xsh$ ");
 }

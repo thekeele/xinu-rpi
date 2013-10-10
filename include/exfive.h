@@ -10,7 +10,11 @@
 
 #include <stddef.h>
 #include <stdio.h>
+#include <stdint.h>
+#include <semaphore.h>
 
 void exfive(void);
+void producer(semaphore, semaphore);
+void consumer(semaphore, semaphore);
 
 #endif                          /* _EXFIVE_H_ */

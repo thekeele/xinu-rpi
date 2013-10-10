@@ -1,0 +1,9 @@
+Assignment: Xinu Project 2
+Authors: Mark Keele & Frank Diaz
+Date: 10/9/2013
+
+Description: These files will collectively add the "exfive" command. This command will spawn two processes and output characters to the command line. Synchronization via semaphores allows the program to print to completion.   
+
+Notes: Included all files that were modified or created. Output from execution was copy and pasted into output.txt and does not represent formatting displayed during program execution.
+
+Work Distribution: Mark 50%, Frank 50%. Frank built the initial structure and got the program running. Mark added the missing pieces and completed assignment.  
