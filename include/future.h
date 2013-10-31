@@ -31,7 +31,7 @@ struct futent {
 };
 
 int futureMain(void);
-future future_alloc(int future_flags);
+future future_alloc(void/*int future_flags*/);
 syscall future_free(future);
 syscall future_get(future, int*);
 syscall future_set(future, int);

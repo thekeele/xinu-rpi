@@ -46,16 +46,16 @@ int futureMain(void)
   return 0;
 }
 
-future future_alloc(int future_flags){
+future future_alloc(void/*int future_flags*/){
    struct futent f;
    //f.state = BLOCK;
-   f.state = future_flags;
+   f.state = 0;
    return f.f; 
 }
 
-syscall future_free(future f){
-  /*struct futent f;
-  f.state = 1;*/
+syscall future_free(future ff){
+  struct futent ff;
+  ff.state = 1;
   return OK;
 }
 
