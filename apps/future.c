@@ -21,29 +21,26 @@ int futureMain(void)
   /*semaphore produced, consumed;
   
   consumed = semcreate(0);
-  produced = semcreate(1);
-  
-  resume( create(consumer, 1024, 20, "cons", 2, consumed, produced) );
-  resume( create(producer, 1024, 20, "prod", 2, consumed, produced) );*/
+  produced = semcreate(1);*/
 
   printf("future test\n");
 
   // allocate three futures
-  /*f1 = future_alloc(0);
-  f2 = future_alloc(0);
+  f1 = future_alloc(0);
+  /*f2 = future_alloc(0);
   f3 = future_alloc(0);*/
 
   // create consumers & producers
-  /*resume( create(future_cons, 1024, 20, "fcons1", 1, f1) );
+  resume( create(future_cons, 1024, 20, "fcons1", 1, f1) );
   resume( create(future_prod, 1024, 20, "fprod1", 1, f1) );
-  resume( create(future_cons, 1024, 20, "fcons2", 1, f2) );
+  /*resume( create(future_cons, 1024, 20, "fcons2", 1, f2) );
   resume( create(future_prod, 1024, 20, "fprod2", 1, f2) );
   resume( create(future_cons, 1024, 20, "fcons3", 1, f3) );
   resume( create(future_prod, 1024, 20, "fprod3", 1, f3) );*/
 
   // tear down the futures
-  /*future_free(f1);
-  future_free(f2);
+  future_free(f1);
+  /*future_free(f2);
   future_free(f3);*/
 
   return 0;
@@ -51,17 +48,17 @@ int futureMain(void)
 
 future future_alloc(int future_flags){
    struct futent f;
-   f.state = BLOCK;
+   //f.state = BLOCK;
+   f.state = future_flags;
    return f.f; 
-
 }
 
 syscall future_free(future f){
-   
+   f.state = 1;
    return OK;
 }
 
-syscall future_get(future f){
+syscall future_get(future f, int *i){
    return OK;
 }
 
