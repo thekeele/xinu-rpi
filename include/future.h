@@ -19,6 +19,10 @@
 #define BLOCK 0
 #define READY 1
 
+/* Future state definitions */
+//#define FFREE 0x03 /**< this future is free */
+//#define FUSED 0x04 /**< this future is used */
+
 /* type definition of "future" */
 typedef unsigned int future;
 
@@ -30,8 +34,10 @@ struct futent {
    future f;
 };
 
+extern struct futent futab[];
+
 int futureMain(void);
-future future_alloc(void/*int future_flags*/);
+future future_alloc(int future_flags);
 syscall future_free(future);
 syscall future_get(future, int*);
 syscall future_set(future, int);

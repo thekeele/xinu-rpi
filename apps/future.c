@@ -46,24 +46,28 @@ int futureMain(void)
   return 0;
 }
 
-future future_alloc(void/*int future_flags*/){
+future future_alloc(int future_flags){
    struct futent f;
    //f.state = BLOCK;
    f.state = 0;
    return f.f; 
 }
 
-syscall future_free(future ff){
-  ff.state = 1;
+syscall future_free(future f){
+  //ff.state = 1;
   return OK;
 }
 
 syscall future_get(future f, int *i){
-   return OK;
+  //wait for ready state(*i)
+  //return future value(f)
+  return OK;
 }
 
 syscall future_set(future f, int i) {
-   return OK;
+  //set future value(f)
+  //set state value(i) to ready
+  return OK;
 }
 
 /**
@@ -79,6 +83,7 @@ void future_prod(void/*semaphore consumed, semaphore produced*/)
     n++;
     //signal(produced);
   }
+  //future_set(f, i);
 }
 
 /**
@@ -89,10 +94,12 @@ void future_cons(void/*semaphore consumed, semaphore produced*/)
 {
   int32_t i;
   
+  //future_value = future_get(f, *i);
+
   for( i=1 ; i<=2000; i++ ) {
     //wait(produced);
     printf("n is %d \n", n);
     //signal(consumed);
   }
-  printf("xsh$ ");
+  //printf("future_value: %d", future_value);
 }
