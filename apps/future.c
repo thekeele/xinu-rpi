@@ -54,8 +54,8 @@ future future_alloc(int future_flags){
 }
 
 syscall future_free(future f){
-  struct futent f;
-  f.state = 1;
+  /*struct futent f;
+  f.state = 1;*/
   return OK;
 }
 
