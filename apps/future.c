@@ -54,7 +54,6 @@ future future_alloc(void/*int future_flags*/){
 }
 
 syscall future_free(future ff){
-  struct futent ff;
   ff.state = 1;
   return OK;
 }
