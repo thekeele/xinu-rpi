@@ -63,6 +63,7 @@ shellcmd xsh_extwo(void);
 shellcmd xsh_exthree(void);
 shellcmd xsh_exfour(void);
 shellcmd xsh_exfive(void);
+shellcmd xsh_future(int, char *[]);
 shellcmd xsh_ethstat(int, char *[]);
 shellcmd xsh_exit(int, char *[]);
 shellcmd xsh_flashstat(int, char *[]);
