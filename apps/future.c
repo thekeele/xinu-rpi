@@ -36,8 +36,8 @@ void futureMain(void)
   resume( create(future_prod, 1024, 20, "fprod1", 2, consumed, produced) );
   resume( create(future_cons, 1024, 20, "fcons2", 2, consumed, produced) );
   resume( create(future_prod, 1024, 20, "fprod2", 2, consumed, produced) );
-  /*resume( create(future_cons, 1024, 20, "fcons3", 1, f3) );
-  resume( create(future_prod, 1024, 20, "fprod3", 1, f3) );*/
+  resume( create(future_cons, 1024, 20, "fcons3", 2, consumed, produced) );
+  resume( create(future_prod, 1024, 20, "fprod3", 2, consumed, produced) );
 
   // tear down the futures
   //future_free(f1);
