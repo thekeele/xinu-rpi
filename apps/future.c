@@ -34,10 +34,10 @@ void futureMain(void)
   // create consumers & producers
   resume( create(future_cons, 1024, 20, "fcons1", 3, f1, cons, prod) );
   resume( create(future_prod, 1024, 20, "fprod1", 3, f1, cons, prod) );
-  /*resume( create(future_cons, 1024, 20, "fcons2", 3, f2, cons, prod) );
+  resume( create(future_cons, 1024, 20, "fcons2", 3, f2, cons, prod) );
   resume( create(future_prod, 1024, 20, "fprod2", 3, f2, cons, prod) );
   resume( create(future_cons, 1024, 20, "fcons3", 3, f3, cons, prod) );
-  resume( create(future_prod, 1024, 20, "fprod3", 3, f3, cons, prod) );*/
+  resume( create(future_prod, 1024, 20, "fprod3", 3, f3, cons, prod) );
 
   // tear down the futures
   future_free(f1);
@@ -86,23 +86,23 @@ syscall future_set(future f, int i) {
 */
 void future_prod(future f, semaphore consumed, semaphore produced)
 {
-  //int32_t i;
-  int myResult = SYSERR;
+  int32_t i;
+  //int myResult = SYSERR;
 
-  /*for( i=1 ; i<=10; i++ ) {
+  for( i=1 ; i<=10; i++ ) {
     wait(consumed);
     number++;
     signal(produced);
-  }*/
+  }
 
   
-  while (myResult != OK)
+  /*while (myResult != OK)
   {
     wait(consumed);
     myResult = future_set(f,number);
     number++;
     signal(produced);
-  }
+  }*/
 }
 
 /**
@@ -111,21 +111,21 @@ void future_prod(future f, semaphore consumed, semaphore produced)
 */
 void future_cons(future f, semaphore consumed, semaphore produced)
 {
-  //int32_t i;
-  int myResult = SYSERR; 
+  int32_t i;
+  //int myResult = SYSERR; 
 
-  /*for( i=1 ; i<=10; i++ ) {
+  for( i=1 ; i<=10; i++ ) {
     wait(produced);
     printf("n is %d \n", number);
     signal(consumed);
-  }*/
+  }
 
 
-  while (myResult != OK)
+  /*while (myResult != OK)
   {
     wait(produced);
     myResult = future_get(f);
     printf("Future-> flag: %d, fstate: %d, state: %d, value: %d\n", futures[f].fcount, futures[f].fstate, futures[f].state, value);
     signal(consumed);
-  }
+  }*/
 }
