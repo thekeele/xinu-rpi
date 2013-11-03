@@ -51,7 +51,7 @@ future future_alloc(int future_flags){
    /*struct futent f;
    f.state = BLOCK;
    f.state = 0;*/
-   return f.f; 
+   return OK; 
 }
 
 syscall future_free(future f){
@@ -59,7 +59,7 @@ syscall future_free(future f){
   return OK;
 }
 
-syscall future_get(future f, int *i){
+syscall future_get(future f){
   //wait for ready state(*i)
   //return future value(f)
   return OK;
