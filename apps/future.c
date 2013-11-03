@@ -23,15 +23,16 @@ void futureMain(void)
   consumed = semcreate(0);
   produced = semcreate(1);
 
-  future f1, f2, f3;
+  future f1, f2, f3;  //future variables
+  int ff1, ff2, ff3;  //future flag variables
 
   // allocate three futures
-  f1 = future_alloc(0);
-  printf("allocate f1: %d\n", f1);
-  f2 = future_alloc(1);
-  printf("allocate f2: %d\n", f3);
-  f3 = future_alloc(2);
-  printf("allocate f3: %d\n", f3);
+  ff1 = future_alloc(0);
+  printf("allocate f1: %d\n", ff1);
+  ff2 = future_alloc(1);
+  printf("allocate f2: %d\n", ff2);
+  ff3 = future_alloc(2);
+  printf("allocate f3: %d\n", ff3);
 
   // create consumers & producers
   resume( create(future_cons, 1024, 20, "fcons1", 3, f1, consumed, produced) );
