@@ -9,7 +9,8 @@
 
 #include <future.h> 
 
-int32_t number = 0; /* number assigned an initial value of zero */
+int32_t number = 7; /* number assigned an initial value of zero */
+int32_t value = 0; /* future value */
 struct futent futures[3]; /* array of structs for each future */
 
 /**
@@ -53,31 +54,32 @@ void futureMain(void)
 * using the future_flags as an index
 */
 future future_alloc(int future_flags){
-  futures[future_flags].fstate =  S_USED;
-  futures[future_flags].fcount =  future_flags;
-  futures[future_flags].state  =  NOT_COMPLETE;
+  futures[future_flags].state = USED;
+  futures[future_flags].fcount = future_flags;
+  futures[future_flags].fstate = NOT_COMPLETE;
   return future_flags;
 }
 
 syscall future_free(future f){
-  futures[f].fstate = S_FREE;
+  futures[f].state = FREE;
   return OK;
 }
 
 syscall future_get(future f){
-  if (futures[f].state == COMPLETE_SUCCESS)
+  if (futures[f].fstate == COMPLETE_SUCCESS)
   {
-    futures[f].state = DONE; 
-    return futures[f].result;
+    futures[f].fstate = DONE; 
+    value = futures[f].result;
+    return OK;
   }
   return SYSERR;
 }
 
 syscall future_set(future f, int i) {
-  if (futures[f].state == NOT_COMPLETE)
+  if (futures[f].fstate == NOT_COMPLETE)
   {
     futures[f].result = i;
-    futures[f].state = COMPLETE_SUCCESS; 
+    futures[f].fstate = COMPLETE_SUCCESS; 
     return OK; 
   } 
   return SYSERR;
@@ -126,7 +128,7 @@ void future_cons(future f, semaphore consumed, semaphore produced)
   while (myResult != OK)
   {
     myResult = future_get(f);
-    printf("Future-> flag: %d, state: %d, value: %d\n", futures[f].fcount, futures[f].state, myResult);
+    printf("Future-> flag: %d, fstate: %d, state: %d, value: %d\n", futures[f].fcount, futures[f].fstate, futures[f].state, value);
   }
   //signal(consumed);
 }
