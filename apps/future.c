@@ -19,15 +19,10 @@ struct futent futures[3]; /* array of structs for each future */
 */
 void futureMain(void)
 {
-  semaphore cons1, cons2, cons3;
-  semaphore prod1, prod2, prod3;
+  semaphore cons, prod;
 
-  cons1 = semcreate(0);
-  prod1 = semcreate(1);
-  cons2 = semcreate(0);
-  prod2 = semcreate(1);
-  cons3 = semcreate(0);
-  prod3 = semcreate(1);
+  cons = semcreate(0);
+  prod = semcreate(1);
 
   future f1, f2, f3;  //future variables
   int ff1, ff2, ff3;  //future flag variables
@@ -42,12 +37,12 @@ void futureMain(void)
   printf("allocate f3: %d\n", ff3);
 
   // create consumers & producers
-  resume( create(future_cons, 1024, 20, "fcons1", 3, f1, cons1, prod1) );
-  resume( create(future_prod, 1024, 20, "fprod1", 3, f1, cons1, prod1) );
-  resume( create(future_cons, 1024, 20, "fcons2", 3, f2, cons2, prod2) );
-  resume( create(future_prod, 1024, 20, "fprod2", 3, f2, cons2, prod2) );
-  resume( create(future_cons, 1024, 20, "fcons3", 3, f3, cons3, prod3) );
-  resume( create(future_prod, 1024, 20, "fprod3", 3, f3, cons3, prod3) );
+  resume( create(future_cons, 1024, 20, "fcons1", 3, f1, cons, prod) );
+  resume( create(future_prod, 1024, 20, "fprod1", 3, f1, cons, prod) );
+  resume( create(future_cons, 1024, 20, "fcons2", 3, f2, cons, prod) );
+  resume( create(future_prod, 1024, 20, "fprod2", 3, f2, cons, prod) );
+  resume( create(future_cons, 1024, 20, "fcons3", 3, f3, cons, prod) );
+  resume( create(future_prod, 1024, 20, "fprod3", 3, f3, cons, prod) );
 
   // tear down the futures
   future_free(f1);
