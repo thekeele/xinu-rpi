@@ -10,7 +10,6 @@
 #include <future.h> 
 
 int32_t number = 0; /* number assigned an initial value of zero */
-int32_t value = 0; /* value of future */
 struct futent futures[3]; /* array of structs for each future */
 
 /**
@@ -29,10 +28,11 @@ void futureMain(void)
 
   // allocate three futures
   ff1 = future_alloc(0);
-  printf("allocate f1: %d\n", ff1);
   ff2 = future_alloc(1);
-  printf("allocate f2: %d\n", ff2);
   ff3 = future_alloc(2);
+
+  printf("allocate f1: %d\n", ff1);
+  printf("allocate f2: %d\n", ff2);
   printf("allocate f3: %d\n", ff3);
 
   // create consumers & producers
@@ -68,8 +68,7 @@ syscall future_get(future f){
   if (futures[f].state == COMPLETE_SUCCESS)
   {
     futures[f].state = DONE; 
-    value = futures[f].result;
-    return value; 
+    return futures[f].result;
   }
   return SYSERR;
 }
@@ -99,12 +98,13 @@ void future_prod(future f, semaphore consumed, semaphore produced)
     signal(produced);
   }*/
 
+  wait(consumed);
   while (myResult != OK)
   {
-    wait(consumed);
-    myResult = future_set(f,10);
-    signal(produced);
+    myResult = future_set(f,number);
   }
+  number++;
+  signal(produced);
 }
 
 /**
@@ -122,11 +122,11 @@ void future_cons(future f, semaphore consumed, semaphore produced)
     signal(consumed);
   }*/
 
+  wait(produced);
   while (myResult != OK)
   {
-    wait(produced);
     myResult = future_get(f);
-    printf("Future-> count: %d, state: %d, value: %d\n", futures[f].fcount, futures[f].state, myResult);
-    signal(consumed);
+    printf("Future-> flag: %d, state: %d, value: %d\n", futures[f].fcount, futures[f].state, myResult);
   }
+  signal(consumed);
 }
