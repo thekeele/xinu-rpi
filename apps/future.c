@@ -86,23 +86,23 @@ syscall future_set(future f, int i) {
 */
 void future_prod(future f, semaphore consumed, semaphore produced)
 {
-  int32_t i;
-  //int myResult = SYSERR;
+  //int32_t i;
+  int myResult = SYSERR;
 
-  for( i=1 ; i<=10; i++ ) {
+  /*for( i=1 ; i<=10; i++ ) {
     wait(consumed);
     number++;
     signal(produced);
-  }
+  }*/
 
   
-  /*while (myResult != OK)
+  while (myResult != OK)
   {
     wait(consumed);
     myResult = future_set(f,number);
     number++;
     signal(produced);
-  }*/
+  }
 }
 
 /**
@@ -111,21 +111,21 @@ void future_prod(future f, semaphore consumed, semaphore produced)
 */
 void future_cons(future f, semaphore consumed, semaphore produced)
 {
-  int32_t i;
-  //int myResult = SYSERR; 
+  //int32_t i;
+  int myResult = SYSERR; 
 
-  for( i=1 ; i<=10; i++ ) {
+  /*for( i=1 ; i<=10; i++ ) {
     wait(produced);
     printf("n is %d \n", number);
     signal(consumed);
-  }
+  }*/
 
 
-  /*while (myResult != OK)
+  while (myResult != OK)
   {
     wait(produced);
     myResult = future_get(f);
     printf("Future-> flag: %d, fstate: %d, state: %d, value: %d\n", futures[f].fcount, futures[f].fstate, futures[f].state, value);
     signal(consumed);
-  }*/
+  }
 }
