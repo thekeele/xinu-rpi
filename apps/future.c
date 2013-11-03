@@ -11,7 +11,7 @@
 
 static int32_t n = 0; /* n assigned an initial value of zero */
 
-struct futent futures[3]; /* array of structs for each future */
+//struct futent futures[3]; /* array of structs for each future */
 
 /**
  * future -- producer and consumer processes synchronized with semaphores
@@ -24,11 +24,11 @@ int futureMain(void)
   consumed = semcreate(0);
   produced = semcreate(1);
 
-  future f1, f2;
+  //future f1, f2;
 
   // allocate three futures
-  f1 = future_alloc(0);
-  f2 = future_alloc(0);
+  //f1 = future_alloc(0);
+  //f2 = future_alloc(0);
   //f3 = future_alloc(0);
 
   // create consumers & producers
@@ -40,8 +40,8 @@ int futureMain(void)
   resume( create(future_prod, 1024, 20, "fprod3", 1, f3) );*/
 
   // tear down the futures
-  future_free(f1);
-  future_free(f2);
+  //future_free(f1);
+  //future_free(f2);
   //future_free(f3);
 
   return 0;
@@ -75,7 +75,7 @@ syscall future_set(future f, int i) {
  * produce -- 
  * @param 
  */
-void future_prod(future f, semaphore consumed, semaphore produced)
+void future_prod(semaphore consumed, semaphore produced)
 {
   int32_t i;
 
@@ -91,7 +91,7 @@ void future_prod(future f, semaphore consumed, semaphore produced)
  * consume -- 
  * @param 
  */
-void future_cons(future f, semaphore consumed, semaphore produced)
+void future_cons(semaphore consumed, semaphore produced)
 {
   int32_t i;
   
