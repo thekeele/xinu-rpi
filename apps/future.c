@@ -9,7 +9,7 @@
 
 #include <future.h> 
 
-int32_t number = 0; /* number assigned an initial value of zero */
+int32_t number = 3; /* number assigned an initial value of zero */
 
 //struct futent futures[3]; /* array of structs for each future */
 
