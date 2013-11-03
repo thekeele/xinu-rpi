@@ -54,8 +54,8 @@ typedef unsigned int future;
  * See 7.7 in the book
  */
 struct futent {
-   int sstate;  // whether entry is S_FREE or S_USED 
-   int scount;  // count for the semaphore  
+   int fstate;  // whether entry is S_FREE or S_USED 
+   int fcount;  // count for the future  
    int state;   // NOT_COMPLETE, COMPLETE_SUCCESS, COMPLETE_FAIL
    int result;  // holds a value
 };

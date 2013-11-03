@@ -27,11 +27,11 @@ void futureMain(void)
 
   // allocate three futures
   f1 = future_alloc(0);
-  printf("f1: %d\n", f1);
-  f2 = future_alloc(0);
-  printf("f2: %d\n", f3);
-  f3 = future_alloc(0);
-  printf("f3: %d\n", f3);
+  printf("allocate f1: %d\n", f1);
+  f2 = future_alloc(1);
+  printf("allocate f2: %d\n", f3);
+  f3 = future_alloc(2);
+  printf("allocate f3: %d\n", f3);
 
   // create consumers & producers
   resume( create(future_cons, 1024, 20, "fcons1", 3, f1, consumed, produced) );
@@ -51,14 +51,14 @@ void futureMain(void)
  * using the future_flags as an index
  */
 future future_alloc(int future_flags){
-   futures[future_flags].sstate =  S_USED;
-   futures[future_flags].scount =  future_flags;
+   futures[future_flags].fstate =  S_USED;
+   futures[future_flags].fcount =  future_flags;
    futures[future_flags].state  =  NOT_COMPLETE;
-   return future_flags; // don't really need to return anything
+   return future_flags;
 }
 
 syscall future_free(future f){
-   futures[f].sstate = S_FREE;
+   futures[f].fstate = S_FREE;
    return OK;
 }
 
