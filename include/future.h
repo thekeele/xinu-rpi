@@ -17,12 +17,13 @@
 #ifndef _FUTURE_H_
 #define _FUTURE_H_
 
-#include <stdint.h>
-#include <semaphore.h>
-#include <conf.h>
 #include <stddef.h>
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdint.h>
+#include <semaphore.h>
+
+//#include <conf.h>
+//#include <stdlib.h>
 
 /* Future state definitions 
 
@@ -68,4 +69,4 @@ syscall future_set(future, int);*/
 void future_prod(semaphore, semaphore);
 void future_cons(semaphore, semaphore);
 
-#endif // _FUTURE_H_
+#endif

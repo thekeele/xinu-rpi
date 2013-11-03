@@ -9,7 +9,7 @@
 
 #include <future.h> 
 
-int number = 0; /* number assigned an initial value of zero */
+static int32_t number = 0; /* number assigned an initial value of zero */
 
 //struct futent futures[3]; /* array of structs for each future */
 
@@ -32,8 +32,8 @@ void futureMain(void)
   //f3 = future_alloc(0);
 
   // create consumers & producers
-  resume( create(future_cons, 1024, 20, "fcons1", 1, consumed, produced) );
-  resume( create(future_prod, 1024, 20, "fprod1", 1, consumed, produced) );
+  resume( create(future_cons, 1024, 20, "fcons1", 2, consumed, produced) );
+  resume( create(future_prod, 1024, 20, "fprod1", 2, consumed, produced) );
   /*resume( create(future_cons, 1024, 20, "fcons2", 1, consumed, produced) );
   resume( create(future_prod, 1024, 20, "fprod2", 1, consumed, produced) );*/
   /*resume( create(future_cons, 1024, 20, "fcons3", 1, f3) );
@@ -75,7 +75,7 @@ syscall future_set(future f, int i) {
  */
 void future_prod(semaphore consumed, semaphore produced)
 {
-  int i;
+  int32_t i;
 
   for( i=1 ; i<=10; i++ ) {
     wait(consumed);
@@ -91,7 +91,7 @@ void future_prod(semaphore consumed, semaphore produced)
  */
 void future_cons(semaphore consumed, semaphore produced)
 {
-  int i;
+  int32_t i;
   
   //future_value = future_get(f, *i);
 
