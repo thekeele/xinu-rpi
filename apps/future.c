@@ -9,7 +9,7 @@
 
 #include <future.h> 
 
-static int32_t n = 0; /* n assigned an initial value of zero */
+int32_t number = 0; /* n assigned an initial value of zero */
 
 //struct futent futures[3]; /* array of structs for each future */
 
@@ -32,10 +32,10 @@ int futureMain(void)
   //f3 = future_alloc(0);
 
   // create consumers & producers
-  resume( create(future_cons, 1024, 20, "fcons1", 1, f1, consumed, produced) );
-  resume( create(future_prod, 1024, 20, "fprod1", 1, f1, consumed, produced) );
-  resume( create(future_cons, 1024, 20, "fcons2", 1, f2, consumed, produced) );
-  resume( create(future_prod, 1024, 20, "fprod2", 1, f2, consumed, produced) );
+  resume( create(future_cons, 1024, 20, "fcons1", 1, consumed, produced) );
+  resume( create(future_prod, 1024, 20, "fprod1", 1, consumed, produced) );
+  resume( create(future_cons, 1024, 20, "fcons2", 1, consumed, produced) );
+  resume( create(future_prod, 1024, 20, "fprod2", 1, consumed, produced) );
   /*resume( create(future_cons, 1024, 20, "fcons3", 1, f3) );
   resume( create(future_prod, 1024, 20, "fprod3", 1, f3) );*/
 
@@ -79,9 +79,9 @@ void future_prod(semaphore consumed, semaphore produced)
 {
   int32_t i;
 
-  for( i=1 ; i<=200; i++ ) {
+  for( i=1 ; i<=10; i++ ) {
     wait(consumed);
-    n++;
+    number++;
     signal(produced);
   }
   //future_set(f, i);
@@ -97,9 +97,9 @@ void future_cons(semaphore consumed, semaphore produced)
   
   //future_value = future_get(f, *i);
 
-  for( i=1 ; i<=200; i++ ) {
+  for( i=1 ; i<=10; i++ ) {
     wait(produced);
-    printf("n is %d \n", n);
+    printf("n is %d \n", number);
     signal(consumed);
   }
   //printf("future_value: %d", future_value);

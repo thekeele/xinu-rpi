@@ -12,7 +12,7 @@
  * This project is to implement futures in Xinu. Also, write a design 
  * document (at least a page) describing implementation considerations.
 
-/* Enhanced Xinu, Fakeright (F) 2013.  All rights revoked. */
+ * Enhanced Xinu, Fakeright (F) 2013.  All rights revoked. */
 
 #ifndef _FUTURE_H_
 #define _FUTURE_H_
@@ -65,7 +65,7 @@ int futureMain(void);
 syscall future_free(future);
 syscall future_get(future); // means this is an "explicit" future
 syscall future_set(future, int);*/
-void future_prod(future, semaphore, semaphore);
-void future_cons(future, semaphore, semaphore);
+void future_prod(semaphore, semaphore);
+void future_cons(semaphore, semaphore);
 
 #endif // _FUTURE_H_
