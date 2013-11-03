@@ -9,8 +9,14 @@
 
 #include <future.h> 
 
+<<<<<<< HEAD
 int32_t number = 0; /* number assigned an initial value of zero */
 struct futent futures[3]; /* array of structs for each future */
+=======
+int32_t number = 3; /* number assigned an initial value of zero */
+
+//struct futent futures[3]; /* array of structs for each future */
+>>>>>>> ef87fc67fec8134b53132732e0fcc6951e9ceca8
 
 /**
  * future -- producer and consumer processes synchronized with semaphores
