@@ -1,55 +1,56 @@
 /**
  * @file future.c
- * @provides 
- *    
- * $Id: `future.c 1337 2013-09-25 11:11:1Z mkeele $
+ *
+ * @author mkeele@indiana.edu Mark Keele | fediaz@indiana.edu Franklin Diaz
+ *
+ * @date 10/31/13
  */
 /* Enhanced Xinu, Fakeright (F) 2013.  All rights revoked. */
 
-#include <exfive.h>
 #include <future.h> 
 
 static int32_t n = 0; /* n assigned an initial value of zero */
-future f1, f2, f3;
+
+struct futent futures[3]; /* array of structs for each future */
 
 /**
- * exfive -- producer and consumer processes synchronized with semaphores
+ * future -- producer and consumer processes synchronized with semaphores
  * @param void
  */
 int futureMain(void)
 {
-  /*semaphore produced, consumed;
+  semaphore produced, consumed;
   
   consumed = semcreate(0);
-  produced = semcreate(1);*/
+  produced = semcreate(1);
 
-  printf("future test\n");
+  future f1, f2;
 
   // allocate three futures
   f1 = future_alloc(0);
-  /*f2 = future_alloc(0);
-  f3 = future_alloc(0);*/
+  f2 = future_alloc(0);
+  //f3 = future_alloc(0);
 
   // create consumers & producers
-  resume( create(future_cons, 1024, 20, "fcons1", 1, f1) );
-  resume( create(future_prod, 1024, 20, "fprod1", 1, f1) );
-  /*resume( create(future_cons, 1024, 20, "fcons2", 1, f2) );
-  resume( create(future_prod, 1024, 20, "fprod2", 1, f2) );
-  resume( create(future_cons, 1024, 20, "fcons3", 1, f3) );
+  resume( create(future_cons, 1024, 20, "fcons1", 1, f1, consumed, produced) );
+  resume( create(future_prod, 1024, 20, "fprod1", 1, f1, consumed, produced) );
+  resume( create(future_cons, 1024, 20, "fcons2", 1, f2, consumed, produced) );
+  resume( create(future_prod, 1024, 20, "fprod2", 1, f2, consumed, produced) );
+  /*resume( create(future_cons, 1024, 20, "fcons3", 1, f3) );
   resume( create(future_prod, 1024, 20, "fprod3", 1, f3) );*/
 
   // tear down the futures
   future_free(f1);
-  /*future_free(f2);
-  future_free(f3);*/
+  future_free(f2);
+  //future_free(f3);
 
   return 0;
 }
 
 future future_alloc(int future_flags){
-   struct futent f;
-   //f.state = BLOCK;
-   f.state = 0;
+   /*struct futent f;
+   f.state = BLOCK;
+   f.state = 0;*/
    return f.f; 
 }
 
@@ -74,14 +75,14 @@ syscall future_set(future f, int i) {
  * produce -- 
  * @param 
  */
-void future_prod(void/*semaphore consumed, semaphore produced*/)
+void future_prod(future f, semaphore consumed, semaphore produced)
 {
   int32_t i;
 
-  for( i=1 ; i<=2000; i++ ) {
-    //wait(consumed);
+  for( i=1 ; i<=200; i++ ) {
+    wait(consumed);
     n++;
-    //signal(produced);
+    signal(produced);
   }
   //future_set(f, i);
 }
@@ -90,16 +91,16 @@ void future_prod(void/*semaphore consumed, semaphore produced*/)
  * consume -- 
  * @param 
  */
-void future_cons(void/*semaphore consumed, semaphore produced*/)
+void future_cons(future f, semaphore consumed, semaphore produced)
 {
   int32_t i;
   
   //future_value = future_get(f, *i);
 
-  for( i=1 ; i<=2000; i++ ) {
-    //wait(produced);
+  for( i=1 ; i<=200; i++ ) {
+    wait(produced);
     printf("n is %d \n", n);
-    //signal(consumed);
+    signal(consumed);
   }
   //printf("future_value: %d", future_value);
 }
