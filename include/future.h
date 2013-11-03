@@ -40,27 +40,27 @@ an exception thrown by the computation, we say that the Future was
 failed with that exception.
 
 */
-#define NOT_COMPLETE     0  // ready to be called by setter
+/*#define NOT_COMPLETE     0  // ready to be called by setter
 #define COMPLETE_SUCCESS 1  // ready to be called by getter
 #define COMPLETE_FAIL    2
 #define DONE             3  // done using, OK to future_free
 #define S_FREE           0
-#define S_USED           1
+#define S_USED           1*/
 
 /* type definition of "future" */
-typedef unsigned int future;
+//typedef unsigned int future;
 
 /* Each entry in futureTable corresponds to one future 
  * See 7.7 in the book
  */
-struct futent {
-   int sstate;  /* whether entry is S_FREE or S_USED  */
-   int scount;  /* count for the semaphore  */
+/*struct futent {
+   int sstate;  // whether entry is S_FREE or S_USED 
+   int scount;  // count for the semaphore  
    int state;   // NOT_COMPLETE, COMPLETE_SUCCESS, COMPLETE_FAIL
    int result;  // holds a value
-};
+};*/
 
-int futureMain(void);
+void futureMain(void);
 /*future future_alloc(int future_flags);
 syscall future_free(future);
 syscall future_get(future); // means this is an "explicit" future
