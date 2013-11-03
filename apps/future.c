@@ -9,7 +9,7 @@
 
 #include <future.h> 
 
-static int32_t number = 0; /* number assigned an initial value of zero */
+int32_t number = 0; /* number assigned an initial value of zero */
 
 //struct futent futures[3]; /* array of structs for each future */
 
@@ -34,8 +34,8 @@ void futureMain(void)
   // create consumers & producers
   resume( create(future_cons, 1024, 20, "fcons1", 2, consumed, produced) );
   resume( create(future_prod, 1024, 20, "fprod1", 2, consumed, produced) );
-  /*resume( create(future_cons, 1024, 20, "fcons2", 1, consumed, produced) );
-  resume( create(future_prod, 1024, 20, "fprod2", 1, consumed, produced) );*/
+  resume( create(future_cons, 1024, 20, "fcons2", 2, consumed, produced) );
+  resume( create(future_prod, 1024, 20, "fprod2", 2, consumed, produced) );
   /*resume( create(future_cons, 1024, 20, "fcons3", 1, f3) );
   resume( create(future_prod, 1024, 20, "fprod3", 1, f3) );*/
 
