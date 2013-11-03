@@ -9,7 +9,7 @@
 
 #include <future.h> 
 
-int32_t number = 0; /* n assigned an initial value of zero */
+static int32_t number = 0; /* number assigned an initial value of zero */
 
 //struct futent futures[3]; /* array of structs for each future */
 
@@ -17,7 +17,7 @@ int32_t number = 0; /* n assigned an initial value of zero */
  * future -- producer and consumer processes synchronized with semaphores
  * @param void
  */
-int futureMain(void)
+void futureMain(void)
 {
   semaphore produced, consumed;
   
@@ -34,8 +34,8 @@ int futureMain(void)
   // create consumers & producers
   resume( create(future_cons, 1024, 20, "fcons1", 1, consumed, produced) );
   resume( create(future_prod, 1024, 20, "fprod1", 1, consumed, produced) );
-  resume( create(future_cons, 1024, 20, "fcons2", 1, consumed, produced) );
-  resume( create(future_prod, 1024, 20, "fprod2", 1, consumed, produced) );
+  /*resume( create(future_cons, 1024, 20, "fcons2", 1, consumed, produced) );
+  resume( create(future_prod, 1024, 20, "fprod2", 1, consumed, produced) );*/
   /*resume( create(future_cons, 1024, 20, "fcons3", 1, f3) );
   resume( create(future_prod, 1024, 20, "fprod3", 1, f3) );*/
 
@@ -43,8 +43,6 @@ int futureMain(void)
   //future_free(f1);
   //future_free(f2);
   //future_free(f3);
-
-  return 0;
 }
 
 /*future future_alloc(int future_flags){
