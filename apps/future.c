@@ -100,13 +100,13 @@ void future_prod(future f, semaphore consumed, semaphore produced)
     signal(produced);
   }*/
 
-  //wait(consumed);
+  wait(consumed);
   while (myResult != OK)
   {
     myResult = future_set(f,number);
   }
   number++;
-  //signal(produced);
+  signal(produced);
 }
 
 /**
@@ -124,11 +124,11 @@ void future_cons(future f, semaphore consumed, semaphore produced)
     signal(consumed);
   }*/
 
-  //wait(produced);
+  wait(produced);
   while (myResult != OK)
   {
     myResult = future_get(f);
     printf("Future-> flag: %d, fstate: %d, state: %d, value: %d\n", futures[f].fcount, futures[f].fstate, futures[f].state, value);
   }
-  //signal(consumed);
+  signal(consumed);
 }
