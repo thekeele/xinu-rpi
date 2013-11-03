@@ -1,25 +1,26 @@
 /**
- * @file future.c
- *
- * @author mkeele@indiana.edu Mark Keele | fediaz@indiana.edu Franklin Diaz
- *
- * @date 10/31/13
- */
+* @file future.c
+*
+* @author mkeele@indiana.edu Mark Keele | fediaz@indiana.edu Franklin Diaz
+*
+* @date 10/31/13
+*/
 /* Enhanced Xinu, Fakeright (F) 2013.  All rights revoked. */
 
 #include <future.h> 
 
 int32_t number = 0; /* number assigned an initial value of zero */
+int32_t value = 0; /* value of future */
 struct futent futures[3]; /* array of structs for each future */
 
 /**
- * future -- producer and consumer processes synchronized with semaphores
- * @param void
- */
+* future -- producer and consumer processes synchronized with semaphores
+* @param void
+*/
 void futureMain(void)
 {
   semaphore produced, consumed;
-  
+
   consumed = semcreate(0);
   produced = semcreate(1);
 
@@ -49,62 +50,83 @@ void futureMain(void)
 }
 
 /*
- * using the future_flags as an index
- */
+* using the future_flags as an index
+*/
 future future_alloc(int future_flags){
-   futures[future_flags].fstate =  S_USED;
-   futures[future_flags].fcount =  future_flags;
-   futures[future_flags].state  =  NOT_COMPLETE;
-   return future_flags;
+  futures[future_flags].fstate =  S_USED;
+  futures[future_flags].fcount =  future_flags;
+  futures[future_flags].state  =  NOT_COMPLETE;
+  return future_flags;
 }
 
 syscall future_free(future f){
-   futures[f].fstate = S_FREE;
-   return OK;
+  futures[f].fstate = S_FREE;
+  return OK;
 }
 
-/*syscall future_get(future f){
-  //wait for ready state(*i)
-  //return future value(f)
-  return OK;
+syscall future_get(future f){
+  if (futures[f].state == COMPLETE_SUCCESS)
+  {
+    futures[f].state = DONE; 
+    value = futures[f].result;
+    return value; 
+  }
+  return SYSERR;
 }
 
 syscall future_set(future f, int i) {
-  //set future value(f)
-  //set state value(i) to ready
-  return OK;
-}*/
-
-/**
- * produce -- 
- * @param 
- */
-void future_prod(future f, semaphore consumed, semaphore produced)
-{
-  int32_t i;
-
-  for( i=1 ; i<=10; i++ ) {
-    wait(consumed);
-    number++;
-    signal(produced);
-  }
-  //future_set(f, i);
+  if (futures[f].state == NOT_COMPLETE)
+  {
+    futures[f].result = i;
+    futures[f].state = COMPLETE_SUCCESS; 
+    return OK; 
+  } 
+  return SYSERR;
 }
 
 /**
- * consume -- 
- * @param 
- */
+* produce -- 
+* @param 
+*/
+void future_prod(future f, semaphore consumed, semaphore produced)
+{
+  //int32_t i;
+  int myResult = SYSERR;
+
+  /*for( i=1 ; i<=10; i++ ) {
+    wait(consumed);
+    number++;
+    signal(produced);
+  }*/
+
+  while (myResult != OK)
+  {
+    wait(consumed);
+    myResult = future_set(f,10);
+    signal(produced);
+  }
+}
+
+/**
+* consume -- 
+* @param 
+*/
 void future_cons(future f, semaphore consumed, semaphore produced)
 {
-  int32_t i;
-  
-  //future_value = future_get(f, *i);
+  //int32_t i;
+  int myResult = SYSERR; 
 
-  for( i=1 ; i<=10; i++ ) {
+  /*for( i=1 ; i<=10; i++ ) {
     wait(produced);
     printf("n is %d \n", number);
     signal(consumed);
+  }*/
+
+  while (myResult != OK)
+  {
+    wait(produced);
+    myResult = future_get(f);
+    printf("Future-> count: %d, state: %d, value: %d\n", futures[f].scount, futures[f].state, myResult);
+    signal(consumed);
   }
-  //printf("future_value: %d", future_value);
 }
