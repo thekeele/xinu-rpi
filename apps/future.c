@@ -126,7 +126,7 @@ void future_cons(future f, semaphore consumed, semaphore produced)
   {
     wait(produced);
     myResult = future_get(f);
-    printf("Future-> count: %d, state: %d, value: %d\n", futures[f].scount, futures[f].state, myResult);
+    printf("Future-> count: %d, state: %d, value: %d\n", futures[f].fcount, futures[f].state, myResult);
     signal(consumed);
   }
 }
