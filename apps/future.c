@@ -27,9 +27,9 @@ void futureMain(void)
   future f1, f2, f3;  //future variables
 
   // allocate three futures
-  future_alloc(0);
-  future_alloc(1);
-  future_alloc(2);
+  f1 = future_alloc(0);
+  f2 = future_alloc(1);
+  f3 = future_alloc(2);
 
   // create consumers & producers
   resume( create(future_cons, 1024, 20, "fcons1", 3, f1, cons, prod) );
@@ -88,13 +88,6 @@ void future_prod(future f, semaphore consumed, semaphore produced)
 {
   //int32_t i;
   int myResult = SYSERR;
-
-  /*for( i=1 ; i<=10; i++ ) {
-    wait(consumed);
-    number++;
-    signal(produced);
-  }*/
-
   
   while (myResult != OK)
   {
@@ -119,9 +112,6 @@ void future_cons(future f, semaphore consumed, semaphore produced)
     printf("n is %d \n", number);
     signal(consumed);
   }*/
-
-
-  printf("FUTURE: %d\n\n", futures[f].fcount)
 
   while (myResult != OK)
   {
