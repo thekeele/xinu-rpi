@@ -121,6 +121,8 @@ void future_cons(future f, semaphore consumed, semaphore produced)
   }*/
 
 
+  printf("FUTURE: %d\n\n", futures[f].fcount)
+
   while (myResult != OK)
   {
     wait(produced);
