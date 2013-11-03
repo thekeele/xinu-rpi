@@ -47,10 +47,10 @@ int futureMain(void)
   return 0;
 }
 
-future future_alloc(int future_flags){
-   /*struct futent f;
-   f.state = BLOCK;
-   f.state = 0;*/
+/*future future_alloc(int future_flags){
+   //struct futent f;
+   //f.state = BLOCK;
+   //f.state = 0;
    return OK; 
 }
 
@@ -69,7 +69,7 @@ syscall future_set(future f, int i) {
   //set future value(f)
   //set state value(i) to ready
   return OK;
-}
+}*/
 
 /**
  * produce -- 

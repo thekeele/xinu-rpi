@@ -61,10 +61,10 @@ struct futent {
 };
 
 int futureMain(void);
-future future_alloc(int future_flags);
+/*future future_alloc(int future_flags);
 syscall future_free(future);
 syscall future_get(future); // means this is an "explicit" future
-syscall future_set(future, int);
+syscall future_set(future, int);*/
 void future_prod(future, semaphore, semaphore);
 void future_cons(future, semaphore, semaphore);
 
