@@ -25,24 +25,19 @@ void futureMain(void)
   prod = semcreate(1);
 
   future f1, f2, f3;  //future variables
-  int ff1, ff2, ff3;  //future flag variables
 
   // allocate three futures
-  ff1 = future_alloc(0);
-  ff2 = future_alloc(1);
-  ff3 = future_alloc(2);
-
-  printf("allocate f1: %d\n", ff1);
-  printf("allocate f2: %d\n", ff2);
-  printf("allocate f3: %d\n", ff3);
+  future_alloc(0);
+  future_alloc(1);
+  future_alloc(2);
 
   // create consumers & producers
   resume( create(future_cons, 1024, 20, "fcons1", 3, f1, cons, prod) );
   resume( create(future_prod, 1024, 20, "fprod1", 3, f1, cons, prod) );
-  resume( create(future_cons, 1024, 20, "fcons2", 3, f2, cons, prod) );
+  /*resume( create(future_cons, 1024, 20, "fcons2", 3, f2, cons, prod) );
   resume( create(future_prod, 1024, 20, "fprod2", 3, f2, cons, prod) );
   resume( create(future_cons, 1024, 20, "fcons3", 3, f3, cons, prod) );
-  resume( create(future_prod, 1024, 20, "fprod3", 3, f3, cons, prod) );
+  resume( create(future_prod, 1024, 20, "fprod3", 3, f3, cons, prod) );*/
 
   // tear down the futures
   future_free(f1);
