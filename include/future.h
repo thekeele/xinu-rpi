@@ -21,8 +21,6 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <semaphore.h>
-//#include <conf.h>
-//#include <stdlib.h>
 
 /* Future state definitions 
 

@@ -9,7 +9,7 @@
 
 #include <future.h> 
 
-int32_t number = 7; /* number assigned an initial value of zero */
+int32_t number = 7; /* number assigned with an initial value */
 int32_t value = 0; /* future value */
 struct futent futures[3]; /* array of structs for each future */
 
@@ -55,11 +55,13 @@ future future_alloc(int future_flags){
   return future_flags;
 }
 
+/* sets state of future to FREE */
 syscall future_free(future f){
   futures[f].state = FREE;
   return OK;
 }
 
+/* if future has value return */
 syscall future_get(future f){
   if (futures[f].fstate == COMPLETE_SUCCESS)
   {
@@ -70,6 +72,7 @@ syscall future_get(future f){
   return SYSERR;
 }
 
+/* if future does not have value set */
 syscall future_set(future f, int i) {
   if (futures[f].fstate == NOT_COMPLETE)
   {
@@ -81,12 +84,11 @@ syscall future_set(future f, int i) {
 }
 
 /**
-* produce -- 
-* @param 
+* produce -- provides a value to future
+* @param future, cons/prod semaphores
 */
 void future_prod(future f, semaphore consumed, semaphore produced)
 {
-  //int32_t i;
   int myResult = SYSERR;
   
   while (myResult != OK)
@@ -99,19 +101,12 @@ void future_prod(future f, semaphore consumed, semaphore produced)
 }
 
 /**
-* consume -- 
-* @param 
+* consume -- gets a value from a future
+* @param future, cons/prod semaphores
 */
 void future_cons(future f, semaphore consumed, semaphore produced)
 {
-  //int32_t i;
   int myResult = SYSERR; 
-
-  /*for( i=1 ; i<=10; i++ ) {
-    wait(produced);
-    printf("n is %d \n", number);
-    signal(consumed);
-  }*/
 
   while (myResult != OK)
   {
