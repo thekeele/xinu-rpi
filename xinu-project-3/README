@@ -1,0 +1,9 @@
+Assignment: Xinu Project 3 - Futures 1
+Authors: Mark Keele & Frank Diaz
+Date: 10/31/2013
+
+Description: These files will collectively add the "future" command. This command will spawn six processes that work in pairs (producer/consumer) to set and get a future value.  
+
+Notes: Included all files that were modified or created. Output from execution was copy and pasted into output.txt and does not represent formatting displayed during program execution.
+
+Work Distribution: Mark 50%, Frank 50%. Mark wrote the design for the program. Frank built the initial structure and got the program running. Mark added the missing pieces and completed assignment.  

@@ -1,0 +1,6 @@
+xsh$ future
+Future-> flag: 0, fstate: 2, state: 1, value: 0
+                                               Future-> flag: 0, fstate: 5, state: 1, value: 7
+                                                                                              Future-> flag: 1, fstate: 5, state: 1, value: 8
+                               Future-> flag: 2, fstate: 5, state: 0, value: 9
+                                                                              xsh$
